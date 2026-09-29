@@ -3,79 +3,1100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Milan & Mandap · Agentic Matrimony & Wedding OS</title>
-<!-- Optional: used only to draw A2UI Icon components. If it can't load (offline/
-     corp network), icons fall back to showing their name as text. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+<title>Milan & Mandap | Autonomous Matrimony & Wedding OS</title>
+<!-- Google Fonts & Material Symbols -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 <style>
-  :root { --accent:#b91c1c; --accent-gold:#d97706; --bg:#faf7f5; --border:#e7ded7; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:system-ui,-apple-system,sans-serif; background:var(--bg); display:flex; flex-direction:column; height:100vh; }
-  header { background:linear-gradient(135deg, #991b1b, #b91c1c); color:#fff; padding:1rem 1.4rem; font-weight:700; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
-  .tagline { font-size:0.85rem; font-weight:400; opacity:0.9; }
-  #log { flex:1; overflow-y:auto; padding:1.2rem; max-width:820px; width:100%; margin:0 auto; }
-  .msg { margin:.6rem 0; }
-  .msg.user { text-align:right; }
-  .bubble { display:inline-block; padding:.7rem 1rem; border-radius:14px; background:#fff; border:1px solid var(--border); text-align:left; max-width:90%; white-space:pre-wrap; }
-  .msg.user .bubble { background:#991b1b; color:#fff; border:none; }
-  /* When the reply is an A2UI card, drop the bubble chrome so the card stands alone. */
-  .bubble.rich { background:transparent; border:none; padding:0; max-width:100%; white-space:normal; }
-  form { display:flex; gap:.6rem; padding:1rem; border-top:1px solid var(--border); background:#fff; max-width:820px; margin:0 auto; width:100%; }
-  input { flex:1; padding:.8rem 1rem; border:1px solid var(--border); border-radius:10px; font-size:1rem; outline:none; }
-  input:focus { border-color:#b91c1c; ring:2px solid #fed7aa; }
-  button { padding:.8rem 1.4rem; border:none; border-radius:10px; background:#991b1b; color:#fff; font-weight:600; cursor:pointer; transition:opacity .2s; }
-  button:hover { opacity:0.9; }
+  :root {
+    --primary: #9b1b30;
+    --primary-dark: #7a1425;
+    --primary-light: #fdf2f4;
+    --gold: #d4af37;
+    --gold-dark: #b89628;
+    --gold-light: #fef9e7;
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-500: #64748b;
+    --slate-100: #f1f5f9;
+    --slate-50: #f8fafc;
+    --border: #e2e8f0;
+    --surface: #ffffff;
+    --success: #10b981;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+  }
 
-  /* --- A2UI component styles (Card, Column, Row, Text, Divider, List, Image, Icon) --- */
-  .a2card { border:1px solid var(--border); border-radius:14px; padding:1.2rem; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.05); max-width:100%; }
-  .a2card + .a2card, .a2col > .a2card { margin-top:.6rem; }
-  .a2col { display:flex; flex-direction:column; gap:.4rem; }
-  .a2row { display:flex; flex-direction:row; gap:.6rem; align-items:center; flex-wrap:wrap; }
-  .a2row.between { justify-content:space-between; }
-  .a2text { margin:0; line-height:1.45; }
-  .a2text.a2-h1 { font-size:1.45rem; font-weight:700; color:#831843; }
-  .a2text.a2-h2 { font-size:1.2rem; font-weight:700; color:#991b1b; }
-  .a2text.a2-h3 { font-size:1.05rem; font-weight:600; color:#374151; }
-  .a2text.a2-h4 { font-size:0.95rem; font-weight:600; color:#4b5563; }
-  .a2text.a2-caption { font-size:.85rem; color:#6b7280; }
-  .a2divider { border:none; border-top:1px solid var(--border); margin:.5rem 0; width:100%; }
-  .a2img { max-width:100%; border-radius:10px; display:block; max-height:280px; object-fit:cover; width:100%; }
-  .material-symbols-outlined { font-family:'Material Symbols Outlined'; font-size:1.25rem; line-height:1; vertical-align:middle; color:#b91c1c; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: #fdfbf9;
+    color: var(--slate-800);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* TOP LUXURY NAVBAR */
+  .navbar {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(155, 27, 48, 0.04);
+  }
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.85rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .brand-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--primary) 0%, #c52742 100%);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    box-shadow: 0 4px 10px rgba(155, 27, 48, 0.25);
+  }
+  .brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .brand-tagline {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--slate-100);
+    padding: 0.3rem;
+    border-radius: var(--radius-full);
+  }
+  .nav-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.15rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--slate-600);
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .nav-tab.active {
+    background: #ffffff;
+    color: var(--primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .nav-tab .badge {
+    background: var(--gold-light);
+    color: var(--gold-dark);
+    border: 1px solid var(--gold);
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-full);
+  }
+
+  .user-status {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .trust-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-full);
+    color: #065f46;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--gold);
+    object-fit: cover;
+  }
+
+  /* QUICK HERO METRICS BAR */
+  .metrics-ticker {
+    background: linear-gradient(90deg, #2b0811 0%, #4a0d1c 50%, #2b0811 100%);
+    color: #ffffff;
+    padding: 0.65rem 1.75rem;
+    font-size: 0.82rem;
+  }
+  .ticker-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffd7df;
+  }
+  .ticker-item b {
+    color: var(--gold);
+  }
+
+  /* MAIN PORTAL APP LAYOUT */
+  .portal-wrapper {
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 320px 1fr 380px;
+    gap: 1.5rem;
+  }
+
+  /* LEFT SIDEBAR: PROFILE & PREFERENCE INTELLIGENCE */
+  .side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .panel-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.35rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .panel-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .profile-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .profile-img-large {
+    width: 68px;
+    height: 68px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    border: 2px solid var(--gold);
+  }
+  .profile-meta h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+  }
+  .profile-meta p {
+    font-size: 0.75rem;
+    color: var(--slate-500);
+  }
+  .trust-meter {
+    background: var(--slate-100);
+    border-radius: var(--radius-full);
+    height: 6px;
+    overflow: hidden;
+    margin: 0.6rem 0 0.3rem 0;
+  }
+  .trust-fill {
+    background: linear-gradient(90deg, #10b981, #059669);
+    height: 100%;
+    width: 98%;
+  }
+
+  .quick-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.65rem;
+    background: var(--slate-100);
+    border-radius: var(--radius-md);
+    font-size: 0.72rem;
+    color: var(--slate-700);
+    font-weight: 600;
+    margin: 0.2rem;
+  }
+
+  .sidebar-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--slate-700);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+  }
+  .sidebar-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: #fbcfe8;
+  }
+
+  /* CENTER: INTERACTIVE WORKSPACE (VIEWS + STREAM FEED) */
+  .workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* VIEW SWITCHER PANELS */
+  .tab-view-content {
+    display: none;
+  }
+  .tab-view-content.active {
+    display: block;
+  }
+
+  /* DISCOVERY MATCH GRID (COMPETITIVE MATRIMONY CARDS) */
+  .grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .grid-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--slate-900);
+  }
+  .candidate-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.25rem;
+  }
+  .candidate-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .candidate-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: #fbcfe8;
+  }
+  .cand-img-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .cand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .candidate-card:hover .cand-img {
+    transform: scale(1.05);
+  }
+  .cand-match-pill {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .cand-match-pill b {
+    color: #10b981;
+  }
+  .cand-trust-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    color: #065f46;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 800;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .cand-body {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .cand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cand-profession {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .cand-location {
+    font-size: 0.78rem;
+    color: var(--slate-500);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .cand-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.3rem 0;
+  }
+  .cand-badge {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-full);
+    color: var(--slate-600);
+    font-weight: 600;
+  }
+  .cand-summary-box {
+    background: #fff9fa;
+    border-left: 3px solid var(--primary);
+    padding: 0.55rem 0.75rem;
+    font-size: 0.75rem;
+    color: var(--slate-700);
+    line-height: 1.4;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .cand-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.6rem;
+  }
+  .btn-outline {
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--slate-700);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .btn-action-primary {
+    padding: 0.6rem;
+    border: none;
+    background: linear-gradient(135deg, var(--primary) 0%, #ba203a 100%);
+    color: #ffffff;
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    box-shadow: 0 2px 6px rgba(155, 27, 48, 0.25);
+  }
+  .btn-action-primary:hover {
+    opacity: 0.95;
+  }
+
+  /* WEDDING OS DASHBOARD VIEW */
+  .wedding-os-dashboard {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .os-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .kpi-card {
+    background: #fdfbf7;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+  .kpi-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    text-transform: uppercase;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0.3rem 0;
+  }
+  .kpi-sub {
+    font-size: 0.72rem;
+    color: #059669;
+    font-weight: 700;
+  }
+  .vendor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  /* RIGHT: AI CONCIERGE STREAMING DRAWER / INTERACTIVE AGENT */
+  .concierge-panel {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 170px);
+    position: sticky;
+    top: 90px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .concierge-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .concierge-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .agent-pulse {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+  .concierge-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .concierge-subtitle {
+    font-size: 0.72rem;
+    color: #94a3b8;
+  }
+
+  /* QUICK AGENT ACTIONS BAR */
+  .quick-chips-bar {
+    padding: 0.65rem 0.85rem;
+    background: var(--slate-50);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0.45rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .quick-chips-bar::-webkit-scrollbar { display: none; }
+  .prompt-chip {
+    padding: 0.35rem 0.7rem;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--slate-700);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .prompt-chip:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: #fbcfe8;
+  }
+
+  /* CONCIERGE CHAT STREAM & BUBBLES */
+  #log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    background: #fafafa;
+  }
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+  }
+  .msg.user {
+    align-self: flex-end;
+  }
+  .msg.agent {
+    align-self: flex-start;
+    max-width: 96%;
+  }
+  .bubble {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    white-space: pre-wrap;
+  }
+  .msg.user .bubble {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-bottom-right-radius: 2px;
+  }
+  .msg.agent .bubble {
+    border-bottom-left-radius: 2px;
+  }
+  .bubble.rich {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  /* CHAT INPUT FORM */
+  #form {
+    padding: 0.75rem;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  #input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border 0.2s;
+  }
+  #input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(155, 27, 48, 0.1);
+  }
+  #sendBtn {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #sendBtn:hover {
+    background: var(--primary-dark);
+  }
+
+  /* RICH A2UI CARD DESIGN */
+  .a2card {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    margin-top: 0.5rem;
+  }
+  .a2col { display: flex; flex-direction: column; gap: 0.4rem; }
+  .a2row { display: flex; flex-direction: row; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .a2text { font-size: 0.82rem; line-height: 1.4; color: var(--slate-700); }
+  .a2text.a2-h1 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--primary); }
+  .a2text.a2-h2 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--slate-900); }
+  .a2text.a2-h3 { font-size: 0.95rem; font-weight: 700; color: var(--slate-900); }
+  .a2text.a2-h4 { font-size: 0.88rem; font-weight: 700; color: var(--primary-dark); }
+  .a2divider { border: none; border-top: 1px solid var(--border); margin: 0.4rem 0; }
+  .a2img { width: 100%; border-radius: var(--radius-md); max-height: 180px; object-fit: cover; }
+  .material-symbols-outlined { font-size: 1.2rem; }
+
+  /* RESPONSIVE BREAKPOINTS */
+  @media (max-width: 1200px) {
+    .portal-wrapper {
+      grid-template-columns: 280px 1fr;
+    }
+    .concierge-panel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      height: 580px;
+      z-index: 100;
+      box-shadow: var(--shadow-xl);
+    }
+  }
+  @media (max-width: 860px) {
+    .portal-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .side-panel {
+      display: none;
+    }
+  }
 </style>
 </head>
 <body>
-<header>
-  <div>💍 Milan & Mandap</div>
-  <div class="tagline">AI Matrimony & One-Stop Wedding Operating System</div>
+
+<!-- LUXURY HEADER -->
+<header class="navbar">
+  <div class="nav-container">
+    <div class="brand-group">
+      <div class="brand-logo-icon">
+        <span class="material-symbols-outlined" style="font-size:26px;color:#d4af37;">favorite</span>
+      </div>
+      <div>
+        <div class="brand-title">Milan & Mandap</div>
+        <div class="brand-tagline">Autonomous Matrimony & Wedding OS</div>
+      </div>
+    </div>
+
+    <!-- MAIN NAV NAVIGATION -->
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="switchTab('discovery')">
+        <span class="material-symbols-outlined" style="font-size:18px;">people</span>
+        Autonomous Matches
+        <span class="badge">AI Audited</span>
+      </button>
+      <button class="nav-tab" onclick="switchTab('wedding-os')">
+        <span class="material-symbols-outlined" style="font-size:18px;">event_available</span>
+        Wedding OS & Venues
+        <span class="badge">Escrow Shield</span>
+      </button>
+      <button class="nav-tab" onclick="switchTab('escrow')">
+        <span class="material-symbols-outlined" style="font-size:18px;">shield</span>
+        Milestone Vault
+      </button>
+    </div>
+
+    <!-- USER IDENTITY -->
+    <div class="user-status">
+      <div class="trust-chip">
+        <span class="material-symbols-outlined" style="font-size:16px;">verified</span>
+        KYC & Liveness 98%
+      </div>
+      <img class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Avatar">
+    </div>
+  </div>
 </header>
-<div id="log"></div>
-<form id="form">
-  <input id="input" placeholder="Ask something…" autocomplete="off" autofocus>
-  <button>Send</button>
-</form>
+
+<!-- QUICK HERO METRICS TICKER -->
+<div class="metrics-ticker">
+  <div class="ticker-wrap">
+    <div class="ticker-item">
+      <span class="material-symbols-outlined" style="font-size:16px;color:#d4af37;">hub</span>
+      <span>Agent Protocol: <b>A2A Autonomous Reasoning</b></span>
+    </div>
+    <div class="ticker-item">
+      <span class="material-symbols-outlined" style="font-size:16px;color:#d4af37;">lock</span>
+      <span>Anti-Disintermediation: <b>Smart Milestone Escrow</b></span>
+    </div>
+    <div class="ticker-item">
+      <span class="material-symbols-outlined" style="font-size:16px;color:#d4af37;">psychology</span>
+      <span>Compatibility Engine: <b>20-Dimension Value Audit</b></span>
+    </div>
+    <div class="ticker-item">
+      <span class="material-symbols-outlined" style="font-size:16px;color:#d4af37;">security</span>
+      <span>Anti-Catfish: <b>Double-Blind Dealbreaker Elimination</b></span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN WORKSPACE -->
+<main class="portal-wrapper">
+
+  <!-- LEFT SIDEBAR: PROFILE & CRITERIA CONTROL -->
+  <aside class="side-panel">
+    <div class="panel-card">
+      <h3>My Agentic Profile <span class="material-symbols-outlined" style="font-size:18px;color:#d4af37;">badge</span></h3>
+      <div class="profile-badge-row">
+        <img class="profile-img-large" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" alt="User">
+        <div class="profile-meta">
+          <h4>Pooja Varma, 29</h4>
+          <p>Architect | Austin, TX</p>
+          <div class="trust-meter"><div class="trust-fill"></div></div>
+          <span style="font-size:0.7rem;color:#059669;font-weight:700;">Trust Score: 99/100 (Tier 1)</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;font-weight:700;color:var(--slate-500);margin-bottom:0.4rem;">VERIFIED BADGES</div>
+        <span class="quick-filter-tag"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">check_circle</span> Workplace</span>
+        <span class="quick-filter-tag"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">check_circle</span> Credit Tier</span>
+        <span class="quick-filter-tag"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">check_circle</span> AI Liveness</span>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <h3>Autonomous Directives</h3>
+      <p style="font-size:0.78rem;color:var(--slate-500);line-height:1.4;margin-bottom:0.75rem;">
+        Your autonomous agent negotiates with candidate agents before any phone number is exchanged.
+      </p>
+      <button class="sidebar-btn" onclick="sendPrompt('Evaluate compatibility for Dr. Ananya Sharma with my preferences')">
+        <span>🔬 Run Compatibility Audit</span>
+        <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+      </button>
+      <button class="sidebar-btn" onclick="sendPrompt('Show luxury wedding venues in Udaipur and Napa Valley with escrow protection')">
+        <span>🏰 Search Escrow Venues</span>
+        <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+      </button>
+      <button class="sidebar-btn" onclick="sendPrompt('Calculate a wedding budget plan for a $120,000 budget with 250 guests')">
+        <span>💰 Plan $120K Wedding Budget</span>
+        <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+      </button>
+      <button class="sidebar-btn" onclick="sendPrompt('Generate a 3-day wedding itinerary for a destination wedding in Udaipur')">
+        <span>📅 Generate 3-Day Itinerary</span>
+        <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CENTER CONTENT -->
+  <section class="workspace">
+
+    <!-- VIEW 1: AUTONOMOUS MATCHES -->
+    <div id="view-discovery" class="tab-view-content active">
+      <div class="grid-header">
+        <div>
+          <h2>Autonomous Candidate Matches</h2>
+          <p style="font-size:0.82rem;color:var(--slate-500);">Pre-negotiated by agent value audits & verified via multi-source credentials</p>
+        </div>
+        <button class="btn-action-primary" onclick="sendPrompt('Evaluate all candidates in the database for me')">
+          <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">sync</span> Re-Audit Matches
+        </button>
+      </div>
+
+      <div class="candidate-cards-grid">
+        <!-- CANDIDATE 1 -->
+        <div class="candidate-card">
+          <div class="cand-img-wrapper">
+            <img class="cand-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500" alt="Dr. Ananya">
+            <div class="cand-match-pill"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">sparkles</span> <b>88%</b> Match</div>
+            <div class="cand-trust-pill"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;color:#059669;">verified</span> 98/100</div>
+          </div>
+          <div class="cand-body">
+            <div class="cand-name">Dr. Ananya Sharma, 28</div>
+            <div class="cand-profession">Pediatric Surgeon · University Hospital</div>
+            <div class="cand-location"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> San Francisco, CA (NYC/Boston Open)</div>
+            <div class="cand-badges">
+              <span class="cand-badge">Vegetarian</span>
+              <span class="cand-badge">Marathon Runner</span>
+              <span class="cand-badge">MD Verified</span>
+            </div>
+            <div class="cand-summary-box">
+              <b>Agent Audit:</b> High lifestyle synergy. Equal parenting agreement verified in private agent simulation.
+            </div>
+            <div class="cand-actions">
+              <button class="btn-outline" onclick="sendPrompt('Deep dive compatibility with Dr. Ananya Sharma')">Deep Audit</button>
+              <button class="btn-action-primary" onclick="sendPrompt('Simulate values alignment conversation with Dr. Ananya Sharma')">Initiate A2A</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CANDIDATE 2 -->
+        <div class="candidate-card">
+          <div class="cand-img-wrapper">
+            <img class="cand-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500" alt="Rohan Mehta">
+            <div class="cand-match-pill"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">sparkles</span> <b>85%</b> Match</div>
+            <div class="cand-trust-pill"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;color:#059669;">verified</span> 96/100</div>
+          </div>
+          <div class="cand-body">
+            <div class="cand-name">Rohan Mehta, 30</div>
+            <div class="cand-profession">AI Research Scientist & Founder</div>
+            <div class="cand-location"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> New York, NY</div>
+            <div class="cand-badges">
+              <span class="cand-badge">Eggetarian</span>
+              <span class="cand-badge">Jazz / Hiker</span>
+              <span class="cand-badge">Govt ID Verified</span>
+            </div>
+            <div class="cand-summary-box">
+              <b>Agent Audit:</b> Transparent conflict resolution style. Shared affinity for sustainable tech and outdoor living.
+            </div>
+            <div class="cand-actions">
+              <button class="btn-outline" onclick="sendPrompt('Deep dive compatibility with Rohan Mehta')">Deep Audit</button>
+              <button class="btn-action-primary" onclick="sendPrompt('Simulate values alignment conversation with Rohan Mehta')">Initiate A2A</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CANDIDATE 3 -->
+        <div class="candidate-card">
+          <div class="cand-img-wrapper">
+            <img class="cand-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500" alt="Vikram Singhania">
+            <div class="cand-match-pill"><span class="material-symbols-outlined" style="font-size:14px;color:#10b981;">sparkles</span> <b>82%</b> Match</div>
+            <div class="cand-trust-pill"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;color:#059669;">verified</span> 95/100</div>
+          </div>
+          <div class="cand-body">
+            <div class="cand-name">Vikram Singhania, 31</div>
+            <div class="cand-profession">Private Equity VP & Angel Investor</div>
+            <div class="cand-location"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> Chicago, IL</div>
+            <div class="cand-badges">
+              <span class="cand-badge">Flexitarian</span>
+              <span class="cand-badge">Polo / Pianist</span>
+              <span class="cand-badge">KYC Verified</span>
+            </div>
+            <div class="cand-summary-box">
+              <b>Agent Audit:</b> Disciplined long-term financial orientation. Flexible on cross-country relocation.
+            </div>
+            <div class="cand-actions">
+              <button class="btn-outline" onclick="sendPrompt('Deep dive compatibility with Vikram Singhania')">Deep Audit</button>
+              <button class="btn-action-primary" onclick="sendPrompt('Simulate values alignment conversation with Vikram Singhania')">Initiate A2A</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: WEDDING OS & VENUES -->
+    <div id="view-wedding-os" class="tab-view-content">
+      <div class="grid-header">
+        <div>
+          <h2>One-Stop Wedding Operating System</h2>
+          <p style="font-size:0.82rem;color:var(--slate-500);">Turn matches into your dream celebration with verified escrow protection</p>
+        </div>
+        <button class="btn-action-primary" onclick="sendPrompt('Create a comprehensive destination wedding master plan for Udaipur')">
+          <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">auto_awesome</span> Generate Master Plan
+        </button>
+      </div>
+
+      <div class="wedding-os-dashboard">
+        <div class="os-kpis">
+          <div class="kpi-card">
+            <div class="kpi-title">Estimated Budget Allocation</div>
+            <div class="kpi-value">$120,000</div>
+            <div class="kpi-sub">✓ 15% Emergency Buffer Locked</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Escrow Protected Vendors</div>
+            <div class="kpi-value">100%</div>
+            <div class="kpi-sub">✓ Zero Flake Guarantee Active</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-title">Run-of-Show Sync</div>
+            <div class="kpi-value">3 Days</div>
+            <div class="kpi-sub">✓ Multi-family Itinerary Linked</div>
+          </div>
+        </div>
+
+        <div class="vendor-grid">
+          <div class="candidate-card">
+            <div class="cand-img-wrapper">
+              <img class="cand-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500" alt="Oberoi Udaivilas">
+              <div class="cand-trust-pill">★ 4.95 Rating</div>
+            </div>
+            <div class="cand-body">
+              <div class="cand-name">The Oberoi Udaivilas Palace</div>
+              <div class="cand-profession">$25,000 / Night · Udaipur, Rajasthan</div>
+              <p style="font-size:0.75rem;color:var(--slate-600);">Grand ballroom, lakefront courtyards, royal royal butler service. Verified milestone escrow vendor.</p>
+              <button class="btn-action-primary" style="margin-top:0.5rem;" onclick="sendPrompt('Tell me about The Oberoi Udaivilas Palace package and escrow terms')">Inspect Venue Details</button>
+            </div>
+          </div>
+
+          <div class="candidate-card">
+            <div class="cand-img-wrapper">
+              <img class="cand-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500" alt="Napa Valley">
+              <div class="cand-trust-pill">★ 4.8 Rating</div>
+            </div>
+            <div class="cand-body">
+              <div class="cand-name">Napa Valley Vista Vineyards</div>
+              <div class="cand-profession">$18,000 / Night · St. Helena, CA</div>
+              <p style="font-size:0.75rem;color:var(--slate-600);">Rolling hillside vineyards, barrel room receptions, sommelier service with outdoor evening lights.</p>
+              <button class="btn-action-primary" style="margin-top:0.5rem;" onclick="sendPrompt('Tell me about Napa Valley Vista Vineyards and calculate budget')">Inspect Venue Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: ESCROW VAULT -->
+    <div id="view-escrow" class="tab-view-content">
+      <div class="panel-card">
+        <h2 style="font-family:'Playfair Display',serif;margin-bottom:0.6rem;">🛡️ Milestone Escrow Vault</h2>
+        <p style="font-size:0.85rem;color:var(--slate-600);line-height:1.5;">
+          Traditional weddings lose up to 18% of their deposits to contractor no-shows, vendor cancellations, and unexpected fee gouging.
+          Milan & Mandap holds all vendor deposits in smart escrow contracts released strictly upon day-of photographic proof and client sign-off.
+        </p>
+        <div style="margin-top:1.2rem;padding:1rem;background:#f8fafc;border-radius:var(--radius-md);border:1px dashed var(--gold);">
+          <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.5rem;">Sample Escrow Release Schedule:</div>
+          <div style="font-size:0.8rem;color:var(--slate-700);display:flex;flex-direction:column;gap:0.4rem;">
+            <div>• <b>20% Booking Deposit:</b> Held in vault until vendor verifies availability and team assignment.</div>
+            <div>• <b>50% Setup Milestone:</b> Released on event morning upon supervisor photo check-in.</div>
+            <div>• <b>30% Final Settlement:</b> Released strictly upon complete deliverable handoff.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- RIGHT SIDE: AI CONCIERGE STREAMING CO-PILOT -->
+  <aside class="concierge-panel">
+    <div class="concierge-header">
+      <div class="concierge-header-left">
+        <div class="agent-pulse"></div>
+        <div>
+          <div class="concierge-title">Milan & Mandap Co-Pilot</div>
+          <div class="concierge-subtitle">Agent Platform · Gemini 2.5 Flash</div>
+        </div>
+      </div>
+      <span class="material-symbols-outlined" style="color:var(--gold);font-size:20px;">stars</span>
+    </div>
+
+    <!-- QUICK PROMPT CHIPS -->
+    <div class="quick-chips-bar">
+      <button class="prompt-chip" onclick="sendPrompt('Find me doctor or healthcare matches')">👩‍⚕️ Healthcare Matches</button>
+      <button class="prompt-chip" onclick="sendPrompt('What venues in Udaipur support escrow?')">🏰 Udaipur Venues</button>
+      <button class="prompt-chip" onclick="sendPrompt('Plan $100K wedding for 200 guests')">💵 $100K Budget</button>
+      <button class="prompt-chip" onclick="sendPrompt('Build a 3-day Sangeet and Wedding itinerary')">🎉 3-Day Itinerary</button>
+    </div>
+
+    <!-- CONCIERGE STREAM LOG -->
+    <div id="log">
+      <div class="msg agent">
+        <div class="bubble">
+          Namaste! I am your <b>Milan & Mandap</b> Autonomous Advisor. I conduct private value audits with candidate agents, eliminate dealbreakers, and architect your end-to-end wedding with smart milestone escrow. How can I assist you today?
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM INPUT -->
+    <form id="form">
+      <input id="input" placeholder="Ask your agent or test compatibility…" autocomplete="off">
+      <button id="sendBtn" type="submit">
+        <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+      </button>
+    </form>
+  </aside>
+
+</main>
 
 <script>
+// TAB SWITCHING
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-view-content').forEach(view => view.classList.remove('active'));
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  const target = document.getElementById('view-' + tabId);
+  if (target) target.classList.add('active');
+}
+
 const log = document.getElementById("log");
 const form = document.getElementById("form");
 const input = document.getElementById("input");
 
-function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function el(tag, cls, text) { 
+  const e = document.createElement(tag); 
+  if (cls) e.className = cls; 
+  if (text != null) e.textContent = text; 
+  return e; 
+}
 
 function bubble(who) {
   const m = el("div", "msg " + who);
   const b = el("div", "bubble");
-  m.appendChild(b); log.appendChild(m); log.scrollTop = log.scrollHeight;
+  m.appendChild(b); 
+  log.appendChild(m); 
+  log.scrollTop = log.scrollHeight;
   return b;
 }
 
-/* ----------------------------------------------------------------------------
- * A2UI mini-renderer (v0.8 Basic Catalog subset).
- * Renders Card / Column / Row / Text / Divider / List / Image / Icon.
- * Anything else falls back to plain text (see renderReply). All text goes in via
- * textContent and image URLs are validated, so agent output can't inject HTML.
- * -------------------------------------------------------------------------- */
+function sendPrompt(text) {
+  input.value = text;
+  form.dispatchEvent(new Event('submit', { cancelable: true }));
+}
 
-// A "bound value" is usually {literalString: "..."}; we only support literals.
+// A2UI MINI-RENDERER
 function boundStr(v) {
   if (v == null) return "";
   if (typeof v === "string") return v;
@@ -83,7 +1104,6 @@ function boundStr(v) {
   return "";
 }
 
-// child ids of a component's props: single `child` and/or `children.explicitList`.
 function childIds(props) {
   const ids = [];
   if (props && typeof props.child === "string") ids.push(props.child);
@@ -92,11 +1112,10 @@ function childIds(props) {
   return ids;
 }
 
-// A2UI icon names are camelCase (locationOn); Material Symbols wants snake_case.
 function iconName(n) { return String(n || "").replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/\s+/g, "_").toLowerCase(); }
 
 function buildNode(id, comps, seen) {
-  if (!id || seen.has(id)) return null;   // missing / cycle guard
+  if (!id || seen.has(id)) return null;
   seen.add(id);
   const spec = comps[id];
   if (!spec || typeof spec !== "object") return null;
@@ -114,14 +1133,12 @@ function buildNode(id, comps, seen) {
       const d = el("div", horizontal ? "a2row" : "a2col"); kids().forEach(n => d.appendChild(n)); return d;
     }
     case "Row": {
-      const d = el("div", "a2row" + (props.distribution === "spaceBetween" ? " between" : ""));
-      kids().forEach(n => d.appendChild(n)); return d;
+      const d = el("div", "a2row"); kids().forEach(n => d.appendChild(n)); return d;
     }
     case "Text": {
       const t = el("div", "a2text");
       const hint = String(props.usageHint || "body").toLowerCase();
       if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(hint)) t.classList.add("a2-" + hint);
-      else if (hint === "caption") t.classList.add("a2-caption");
       t.textContent = boundStr(props.text);
       return t;
     }
@@ -129,19 +1146,17 @@ function buildNode(id, comps, seen) {
       return el("hr", "a2divider");
     case "Image": {
       const src = boundStr(props.url || props.src);
-      if (!/^https?:\/\//i.test(src)) return null;   // only allow safe URLs
+      if (!/^https?:\/\//i.test(src)) return null;
       const img = el("img", "a2img"); img.src = src; img.alt = boundStr(props.alt) || ""; return img;
     }
     case "Icon": {
       const s = el("span", "material-symbols-outlined"); s.textContent = iconName(boundStr(props.name) || props.name); return s;
     }
     default:
-      return null;   // unknown component -> skipped (text fallback covers content)
+      return null;
   }
 }
 
-// Render one or more A2UI messages (beginRendering + surfaceUpdate) into `container`.
-// Returns true if anything was drawn.
 function renderSurface(messages, container) {
   const comps = {};
   const roots = [];
@@ -151,7 +1166,7 @@ function renderSurface(messages, container) {
     if (su && Array.isArray(su.components)) for (const c of su.components) if (c && c.id && c.component) comps[c.id] = c.component;
   }
   let rootIds = roots.filter(r => comps[r]);
-  if (rootIds.length === 0) {   // no valid root given -> infer un-referenced components
+  if (rootIds.length === 0) {
     const referenced = new Set();
     for (const id in comps) { const spec = comps[id]; childIds(spec[Object.keys(spec)[0]] || {}).forEach(c => referenced.add(c)); }
     rootIds = Object.keys(comps).filter(id => !referenced.has(id));
@@ -161,7 +1176,6 @@ function renderSurface(messages, container) {
   return drew;
 }
 
-// Fallback: pull every Text value out of the messages as plain text.
 function flattenText(messages) {
   const out = [];
   for (const m of messages) {
@@ -172,7 +1186,7 @@ function flattenText(messages) {
 }
 
 function renderReply(b, parts) {
-  b.textContent = "";   // clear the "…" placeholder
+  b.textContent = "";
   const texts = parts.filter(p => p && (p.kind === "text" || (!p.kind && p.text))).map(p => p.text || "");
   const a2ui = parts.filter(p => p && p.kind === "a2ui" && p.data).map(p => p.data);
 
@@ -187,19 +1201,19 @@ function renderReply(b, parts) {
   log.scrollTop = log.scrollHeight;
 }
 
-// The proxy returns { parts: [{kind:"text",text} | {kind:"a2ui",data}] }.
 form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
   const text = input.value.trim();
   if (!text) return;
   bubble("user").textContent = text;
   input.value = "";
-  const b = bubble("agent"); b.textContent = "…";
+  const b = bubble("agent"); b.textContent = "Negotiating over A2A protocol…";
   try {
-    const res = await fetch("/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: text }) });
-    // Read as text first, then parse. If the proxy ever returns a non-JSON error
-    // page (e.g. a plain "Internal Server Error"), show that body instead of a
-    // cryptic "Unexpected token" JSON error.
+    const res = await fetch("/chat", { 
+      method: "POST", 
+      headers: { "Content-Type": "application/json" }, 
+      body: JSON.stringify({ message: text }) 
+    });
     const raw = await res.text();
     let data;
     try { data = JSON.parse(raw); }
